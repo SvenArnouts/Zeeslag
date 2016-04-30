@@ -17,6 +17,9 @@ using namespace std;
 
 //Constructor
 Game::Game(int height_i, int width_i) {
+
+	// Matthijs was here
+
 	boardHeight = height_i;
 	boardWidth = width_i;
 
