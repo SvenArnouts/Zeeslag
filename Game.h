@@ -9,7 +9,6 @@
 
 #include "Ship.h"
 #include "Coordinates.h"
-#include "Game.h"
 #include "Graphics.h"
 #include "Gameboard.h"
 #include <iostream>

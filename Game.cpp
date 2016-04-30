@@ -4,16 +4,7 @@
  *  @Date 26-apr.-2016
  */
 
-#include "Ship.h"
-#include "Coordinates.h"
 #include "Game.h"
-#include "Graphics.h"
-#include "Gameboard.h"
-#include <iostream>
-#include <string>
-#include <vector>
-
-using namespace std;
 
 //Constructor
 Game::Game(int height_i, int width_i) {
