@@ -32,6 +32,8 @@ private:
 	Gameboard speler;
 	Gameboard cpu;
 
+	Graphics spelbord;
+
 };
 
 #endif /* GAME_H_ */

@@ -18,9 +18,6 @@ int main() {
 
 	Game blabla(10, 10);
 
-	Graphics spelbord;
-	spelbord.setDimensions(10, 10);
-
 	return 0;
 }
 

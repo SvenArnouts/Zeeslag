@@ -9,14 +9,13 @@
 //Constructor
 Game::Game(int height_i, int width_i) {
 
-	// Matthijs was here
-
 	boardHeight = height_i;
 	boardWidth = width_i;
 
-	Graphics spelbord;
+	speler.setCoords(createCoords(Coordinates(1,1), 5, 'V'));
+
 	spelbord.setDimensions(10, 10);
-	spelbord.draw(speler.getShips(), cpu.getWasHit(), cpu.getWasMissed(), speler.getWasHit(), speler.getWasMissed());
+	spelbord.draw(speler.getCoords(), cpu.getWasHit(), cpu.getWasMissed(), speler.getWasHit(), speler.getWasMissed());
 }
 
 
@@ -34,7 +33,6 @@ vector <Coordinates> Game::createCoords( Coordinates coord, int length, char dir
 			for (int i = 1; i <= length; i++) {
 				shipLoc.push_back(Coordinates(x, y));
 				x++;
-				cout << x << endl;
 			}
 		}
 		else {
