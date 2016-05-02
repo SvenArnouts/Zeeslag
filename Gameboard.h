@@ -17,23 +17,35 @@ using namespace std;
 class Gameboard {
 
 public:
+	//Default constructor
+	Gameboard() : boardWidth(10), boardHeight(10) {}
 	//Constructor
-	Gameboard();
+	Gameboard(const int& width, const int& height) : boardWidth (width), boardHeight (height) {}
 
 	//getters & setters
-	vector <Coordinates> getWasHit() { return wasHit;}			//getter wasHit
-	vector <Coordinates> getWasMissed() {return wasMissed;}		//getter wasMissed
-	vector <Coordinates> getCoords() {return allCoords;}		//getter Ships
-	void setCoords(vector <Coordinates> ShipLoc);				//voegt coordinaten toe bij de verzameling
+	vector <Coordinates> getHit() { return hit;}					//getter hits
+	vector <Coordinates> getMissed() {return missed;}				//getter misses
+	vector <Coordinates> getCoords() {return allCoords;}			//getter schipcoordinaten
+	int getWidth() {return boardWidth;}								//getter breedte spelbord
+	int getHeight() {return boardHeight;}							//getter hoogte spelbord
 
-	void addHit (Coordinates Hit) { wasHit.push_back (Hit); }		//voegt een hit toe
-	void addMiss (Coordinates Miss) {wasMissed.push_back (Miss);}	//voegt een mis toe
-	bool validCoords(vector <Coordinates> ShipLoc);
+	void setWidth(const int& width) {boardWidth = width;}			//setter breedte spelbord
+	void setHeight(const int& height) {boardHeight = height;}		//setter hoogte spelbord
+
+	bool validBomb (Coordinates bomb);									//bom-coordinaten nog niet gebruikt/binnen het spelbord?
+	void addHit (const Coordinates& bomb) { hit.push_back (bomb); }		//voegt een hit toe
+	void addMiss (const Coordinates& bomb) {missed.push_back (bomb);}	//voegt een mis toe
+
+	bool validShip(vector <Coordinates> ship);							//schip-coordinaten nog niet gebruikt/binnen het spelbord?
+	void addShip(vector <Coordinates> ship);							//voegt schipcoordinaten toe
 
 private:
-	vector <Coordinates> wasHit;			//coordinaten waar de speler geraakt is
-	vector <Coordinates> wasMissed;			//coordinaten waar de speler werd gemist
+	vector <Coordinates> hit;				//coordinaten waar de speler geraakt is
+	vector <Coordinates> missed;			//coordinaten waar de speler werd gemist
 	vector <Coordinates> allCoords;			//vector die alle coordinaten van de schepen bevat
+
+	int boardWidth;							//breedte van het spelbord (x-coordinaat)
+	int boardHeight;						//hoogte van het spelbord (y-coordinaat)
 };
 
 #endif /* GAMEBOARD_H_ */

@@ -20,14 +20,17 @@ using namespace std;
 class Game {
 
 public:
+	//Constructor
 	Game(int boardHeight, int boardWidth);
 
+	//Functie die het spel voorstelt.
+	void Gameloop();
+
+	//Functie die coordinaten voor een schip creëert uit startcoordinaten, een lengte en een richting.
 	vector <Coordinates> createCoords (Coordinates coord_i, int length, char direction);
 
 
 private:
-	int boardHeight;
-	int boardWidth;
 
 	Gameboard speler;
 	Gameboard cpu;

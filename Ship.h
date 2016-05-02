@@ -24,7 +24,7 @@ public:
 
 	string getName() const {return name;}							//getter naam schip
 	int getLength() const {return length;}							//getter lengte schip
-	vector<Coordinates> getShipLoc() const {return ShipLoc;} 		//getter coordinaten schip
+	vector<Coordinates> getShipLoc() const {return loc;} 			//getter coordinaten schip
 
 	void setName( string name_i) {name = name_i;}
 	void setLength ( int length_i) {length = length_i;}
@@ -37,8 +37,7 @@ private:
 	string name;									//naam van het schip
 	int length;										//lengte van het schip
 													//ingegeven begincoordinaten
-	char dir;										//richting waarin het ligt (horizontaal/verticaal)
-	vector<Coordinates> ShipLoc;					//vector met de coordinaten
+	vector<Coordinates> loc;						//vector met de coordinaten
 
 };
 

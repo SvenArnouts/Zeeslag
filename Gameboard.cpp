@@ -6,44 +6,61 @@
 
 #include "Gameboard.h"
 
-Gameboard::Gameboard() {
-}
-
-void Gameboard::setCoords(vector <Coordinates> shipLoc) {
-	for (signed int i = 0; i < shipLoc.size(); i++) {
-		allCoords.push_back(shipLoc[i]);
+//Functie die coordinaten toevoegt aan het spelbord
+void Gameboard::addShip(vector <Coordinates> ship) {
+	for (signed int i = 0; i < ship.size(); i++) {
+		allCoords.push_back(ship[i]);
 	}
 }
 /**Functie die kijkt of de ingegeven coordinaten voor een schip binnen het spelbord vallen
 	en niet reeds ingenomen worden door een ander schip.
  */
-bool Gameboard::validCoords(vector <Coordinates> shipLoc) {
+bool Gameboard::validShip(vector <Coordinates> ship) {
 	bool boolValue = true;											//Initialiseer de waarde op true
 
-	for (int i = 0; i < shipLoc.size(); i++){						//for-loop die door alle nieuwe coordinaten loopt
-		for (int j = 0; j < allCoords.size(); j++){					//for-loop die door alle reeds bestaande coordinaten loopt
+	for (signed int i = 0; i < ship.size(); i++){					//for-loop die door alle nieuwe coordinaten loopt
 
-			int xNew = shipLoc[i].getX();							//getter voor de nieuwe x-coordinaat
-			int yNew = shipLoc[i].getY();							//getter voor de nieuwe y-coordinaat
-			int x = allCoords[j].getX();							//getter voor de reeds bestaande x-coordinaat
-			int y = allCoords[j].getY();							//getter voor de reeds bestaande y-coordinaat
+		//Check of de coordinaten binnen het spelbord vallen.
+		if (ship[i].getX() > boardWidth || ship[i].getY() > boardHeight){
+			boolValue = false;
+		}
+		else {
+			for (signed int j = 0; j < allCoords.size(); j++){		//for-loop die door alle reeds bestaande coordinaten loopt
 
-
-
-			/* De boolValue wordt veranderd naar false indien de nieuwe x- of y-coordinaat groter is dan 10, of wanneer
-			 * de coordinaten gelijk zijn aan een reeds bestaande coordinaat.
-			 */
-			if (xNew > 10 || yNew > 10 || (xNew == x && yNew == y)){
-				boolValue = false;
+				//Check of de coordinaten niet reeds worden ingenomen door een ander schip.
+				if (ship[i].getX() == allCoords[j].getX() && ship[i].getY() == allCoords[j].getY()) {
+					boolValue = false;
+				}
 			}
+		}
+	}
+	return boolValue;												//Geef de boolwaarde terug
+}
+
+//Functie die checkt of een bom op een valabele plaats geplaatst wordt
+bool Gameboard::validBomb(Coordinates bomb) {
+	bool boolValue = true;											//Initialiseer de waarde op true
+
+	if (bomb.getX() > boardWidth || bomb.getY() > boardHeight){		//Check of de ingegeven coordinaat binnen het spelbord valt
+		boolValue = false;
+	}
+
+	//Volgende 2 for loops checken of er niet reeds gevuurd (hit of miss) is op de coordinaat.
+	for (signed int i = 0; i < hit.size(); i++) {
+
+		if ((bomb.getX() == hit[i].getX()) && (bomb.getY() == hit[i].getY())) {
+			boolValue = false;
+		}
+	}
+
+	for (signed int i = 0; i < missed.size(); i++) {
+
+		if ((bomb.getX() == missed[i].getX()) && (bomb.getY() == missed[i].getY())) {
+			boolValue = false;
 		}
 	}
 	return boolValue;
 }
-
-
-
-
 
 
 

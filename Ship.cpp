@@ -10,7 +10,7 @@
 Ship::Ship(const string& name_i, const int& length_i, const char& dir_i) {
 	name = name_i;
 	length = length_i;
-	dir = dir_i;
+
 }
 
 
