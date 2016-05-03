@@ -15,6 +15,9 @@ Game::Game(int width, int height) {
 	cpu.setWidth(width);
 	cpu.setHeight(height);
 
+	speler.addShip("a", createCoords(Coordinates(6,10), 5, 'H'));
+	speler.addHit(Coordinates(6, 10));
+
 	//Zet de dimensies en roep de benodigde vectors op voor het tekenen van het spelbord.
 	spelbord.setDimensions(width, height);
 	spelbord.draw(speler.getCoords(), cpu.getHit(), cpu.getMissed(), speler.getHit(), speler.getMissed());
@@ -50,7 +53,7 @@ vector <Coordinates> Game::createCoords( Coordinates coord, int length, char dir
 
 void Game::Gameloop() {
 	if (speler.validShip(createCoords(Coordinates(1,10), 5, 'V')) == true) {
-	speler.addShip(createCoords(Coordinates(1,1), 5, 'V'));
+	speler.addShip("vliegdekschip", createCoords(Coordinates(1,1), 5, 'V'));
 }
 else {
 	cout << "Het schip kan niet worden geplaatst."

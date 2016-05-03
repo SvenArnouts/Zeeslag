@@ -37,7 +37,7 @@ public:
 	void addMiss (const Coordinates& bomb) {missed.push_back (bomb);}	//voegt een mis toe
 
 	bool validShip(vector <Coordinates> ship);							//schip-coordinaten nog niet gebruikt/binnen het spelbord?
-	void addShip(vector <Coordinates> ship);							//voegt schipcoordinaten toe
+	void addShip(string name, vector <Coordinates> ship);				//voegt schipcoordinaten toe aan spelbord, voegt naam toe aan vector
 
 private:
 	vector <Coordinates> hit;				//coordinaten waar de speler geraakt is
@@ -46,6 +46,8 @@ private:
 
 	int boardWidth;							//breedte van het spelbord (x-coordinaat)
 	int boardHeight;						//hoogte van het spelbord (y-coordinaat)
+
+	vector <string> ships;					//Bevat de schepen
 };
 
 #endif /* GAMEBOARD_H_ */

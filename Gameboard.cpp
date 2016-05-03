@@ -7,8 +7,10 @@
 #include "Gameboard.h"
 
 //Functie die coordinaten toevoegt aan het spelbord
-void Gameboard::addShip(vector <Coordinates> ship) {
-	for (signed int i = 0; i < ship.size(); i++) {
+void Gameboard::addShip(string name, vector <Coordinates> ship) {
+	ships.push_back(name);
+
+	for (unsigned int i = 0; i < ship.size(); i++) {
 		allCoords.push_back(ship[i]);
 	}
 }
@@ -18,14 +20,14 @@ void Gameboard::addShip(vector <Coordinates> ship) {
 bool Gameboard::validShip(vector <Coordinates> ship) {
 	bool boolValue = true;											//Initialiseer de waarde op true
 
-	for (signed int i = 0; i < ship.size(); i++){					//for-loop die door alle nieuwe coordinaten loopt
+	for (unsigned int i = 0; i < ship.size(); i++){					//for-loop die door alle nieuwe coordinaten loopt
 
 		//Check of de coordinaten binnen het spelbord vallen.
 		if (ship[i].getX() > boardWidth || ship[i].getY() > boardHeight){
 			boolValue = false;
 		}
 		else {
-			for (signed int j = 0; j < allCoords.size(); j++){		//for-loop die door alle reeds bestaande coordinaten loopt
+			for (unsigned int j = 0; j < allCoords.size(); j++){		//for-loop die door alle reeds bestaande coordinaten loopt
 
 				//Check of de coordinaten niet reeds worden ingenomen door een ander schip.
 				if (ship[i].getX() == allCoords[j].getX() && ship[i].getY() == allCoords[j].getY()) {
@@ -46,14 +48,14 @@ bool Gameboard::validBomb(Coordinates bomb) {
 	}
 
 	//Volgende 2 for loops checken of er niet reeds gevuurd (hit of miss) is op de coordinaat.
-	for (signed int i = 0; i < hit.size(); i++) {
+	for (unsigned int i = 0; i < hit.size(); i++) {
 
 		if ((bomb.getX() == hit[i].getX()) && (bomb.getY() == hit[i].getY())) {
 			boolValue = false;
 		}
 	}
 
-	for (signed int i = 0; i < missed.size(); i++) {
+	for (unsigned int i = 0; i < missed.size(); i++) {
 
 		if ((bomb.getX() == missed[i].getX()) && (bomb.getY() == missed[i].getY())) {
 			boolValue = false;

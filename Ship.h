@@ -17,26 +17,24 @@ using namespace std;
 class Ship {
 public:
 
-	Ship(const string& name , const int& length, const char& direction);
+	Ship(const string& name_i , const int& length, const vector <Coordinates>& location);
 
 
 	//getters & setters
 
 	string getName() const {return name;}							//getter naam schip
-	int getLength() const {return length;}							//getter lengte schip
-	vector<Coordinates> getShipLoc() const {return loc;} 			//getter coordinaten schip
+	int getHealth() const {return health;}							//getter lengte schip
+	vector<Coordinates> getLoc() const {return loc;} 				//getter coordinaten schip
 
-	void setName( string name_i) {name = name_i;}
-	void setLength ( int length_i) {length = length_i;}
-	bool validPlace(Coordinates beginCoord, int length, char direction);
+	void setName(const string& name_i) {name = name_i;}
+	void setHealth (const int& health_i) {health = health_i;}
 
-
+	bool wasHit(const Coordinates& bomb);
 
 private:
 
 	string name;									//naam van het schip
-	int length;										//lengte van het schip
-													//ingegeven begincoordinaten
+	int health;										//levens van het schip (wanneer 0 => schip gezonken)
 	vector<Coordinates> loc;						//vector met de coordinaten
 
 };
