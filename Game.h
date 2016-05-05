@@ -7,7 +7,6 @@
 #ifndef GAME_H_
 #define GAME_H_
 
-#include "Ship.h"
 #include "Coordinates.h"
 #include "Graphics.h"
 #include "Gameboard.h"

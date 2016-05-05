@@ -8,6 +8,7 @@
 #define GAMEBOARD_H_
 
 #include "Coordinates.h"
+#include "Ship.h"
 #include <iostream>
 #include <string>
 #include <vector>
@@ -32,12 +33,14 @@ public:
 	void setWidth(const int& width) {boardWidth = width;}			//setter breedte spelbord
 	void setHeight(const int& height) {boardHeight = height;}		//setter hoogte spelbord
 
-	bool validBomb (Coordinates bomb);									//bom-coordinaten nog niet gebruikt/binnen het spelbord?
+	bool validBomb (const Coordinates& bomb);									//bom-coordinaten nog niet gebruikt/binnen het spelbord?
+	bool isAHit (const Coordinates& bomb);								//Checkt of een bom een hit of een miss is.
 	void addHit (const Coordinates& bomb) { hit.push_back (bomb); }		//voegt een hit toe
 	void addMiss (const Coordinates& bomb) {missed.push_back (bomb);}	//voegt een mis toe
 
-	bool validShip(vector <Coordinates> ship);							//schip-coordinaten nog niet gebruikt/binnen het spelbord?
-	void addShip(string name, vector <Coordinates> ship);				//voegt schipcoordinaten toe aan spelbord, voegt naam toe aan vector
+	bool validShip(const vector <Coordinates>& ship);				//schip-coordinaten nog niet gebruikt/binnen het spelbord?
+	void addShip(const string& name, const int& lenght,				//voegt schipcoordinaten toe aan spelbord, voegt schip toe aan vector
+			const vector <Coordinates>& location);
 
 private:
 	vector <Coordinates> hit;				//coordinaten waar de speler geraakt is
@@ -47,7 +50,7 @@ private:
 	int boardWidth;							//breedte van het spelbord (x-coordinaat)
 	int boardHeight;						//hoogte van het spelbord (y-coordinaat)
 
-	vector <string> ships;					//Bevat de schepen
+	vector <Ship> ships;					//Bevat de schepen
 };
 
 #endif /* GAMEBOARD_H_ */
