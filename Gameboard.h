@@ -33,15 +33,16 @@ public:
 	void setWidth(const int& width) {boardWidth = width;}			//setter breedte spelbord
 	void setHeight(const int& height) {boardHeight = height;}		//setter hoogte spelbord
 
-	bool validBomb (const Coordinates& bomb);									//bom-coordinaten nog niet gebruikt/binnen het spelbord?
+	bool validBomb (const Coordinates& bomb);							//bom-coordinaten nog niet gebruikt/binnen het spelbord?
 	bool isAHit (const Coordinates& bomb);								//Checkt of een bom een hit of een miss is.
-	void addHit (const Coordinates& bomb) { hit.push_back (bomb); }		//voegt een hit toe
 	void addMiss (const Coordinates& bomb) {missed.push_back (bomb);}	//voegt een mis toe
+	void addHit (const Coordinates& bomb);								//voegt een hit toe
 
 	bool validShip(const vector <Coordinates>& ship);				//schip-coordinaten nog niet gebruikt/binnen het spelbord?
 	void addShip(const string& name, const int& lenght,				//voegt schipcoordinaten toe aan spelbord, voegt schip toe aan vector
 			const vector <Coordinates>& location);
 
+	bool gameOver();						//Checkt of alle schepen gezonken zijn, ifso => game is over
 private:
 	vector <Coordinates> hit;				//coordinaten waar de speler geraakt is
 	vector <Coordinates> missed;			//coordinaten waar de speler werd gemist

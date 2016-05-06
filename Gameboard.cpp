@@ -92,6 +92,23 @@ bool Gameboard::isAHit(const Coordinates& bomb){
 	return boolValue;
 }
 
+//Functie die een hit toevoegt aan het spelbord en over de schepen loopt om te kijken of het
+void addHit (const Coordinates& bomb) {
+	hit.push_back(bomb);												//Voeg een hit toe
+
+	for (Ship x : ships) {												//Check of een schip gezonken is
+		x.wasHit(bomb);
+	}
+}
+
+//Functie die checkt of alle schepen gezonken zijn
+bool Gameboard :: gameOver() {
+	bool boolValue = false;												//Stel boolwaarde in op false
+
+	if (hit.size() == allCoords.size()) {boolValue = true;}
+
+	return boolValue;
+}
 
 
 

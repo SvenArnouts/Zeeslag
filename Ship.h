@@ -28,6 +28,7 @@ public:
 
 	void setName(const string& name_i) {name = name_i;}
 	void setHealth (const int& health_i) {health = health_i;}
+	void setLoc (const vector <Coordinates>& location) {loc = location;}
 
 	bool wasHit(const Coordinates& bomb);
 
