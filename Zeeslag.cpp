@@ -58,18 +58,19 @@ int main() {
 		int regelnummer = 1;
 
 		while( getline(config, tekstregel )) {
-			if (tekstregel[0] != '#') {
+			if (tekstregel[0] != '#' && !tekstregel.empty() && tekstregel[0] != ' ') {
 				tekst << tekstregel << endl;
+				cout << tekstregel << endl;
 				if (regelnummer == 1 ){
 					tekst >> width >> height;
-					regelnummer +=1;
+					regelnummer++;
 				}
 				else {
 					tekst >> name_i >> length_i >> number_i;
 					shipNames.push_back(name_i);
 					shipLenghts.push_back(length_i);
 					numberOfShips.push_back(number_i);
-					regelnummer += 1;
+					regelnummer++;
 				}
 			}
 		}
