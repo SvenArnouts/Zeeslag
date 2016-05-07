@@ -50,10 +50,52 @@ vector <Coordinates> Game::createCoords( Coordinates coord, int length, char dir
 
 void Game::gameloop() {
 
+	//Display de grootte van het spelbord en de deelnemende schepen
 	cout << "De grootte van het spelbord bedraagd " << speler.getWidth() << " op " << speler.getHeight() << "." << endl;
 	cout << "Volgende schepen nemen deel aan het spel:" << endl;
 	for (unsigned int i = 0; i < shipNames.size(); i++) {
 		cout << shipNames[i] << "\t \t \t met lengte " << shipLenghts[i] << ": \t \t \t aantal " << numberOfShips[i] << endl;
 	}
+
+	//Start het plaatsen van de schepen.
+	//Inleesvariabelen:
+	int coordX = 0;
+	int coordY = 0;
+	char direction = ' ';
+	bool validPlace = false;
+	//speler
+	cout << "Plaats uw shepen: " << endl;
+
+	for (unsigned int i = 0; i < shipNames.size(); i++){
+		for (int j = 1; j <= numberOfShips[i]; j++) {
+			cout << "Waar wil u uw " << shipNames[i] << " met lengte " << shipLenghts[i] << " plaatsen?" << endl;
+			do {
+				cin >> coordX >> coordY >> direction;
+				validPlace = speler.validShip(createCoords(Coordinates(coordX, coordY), shipLenghts[i], direction));
+				if (validPlace) {
+				cout << "Het schip werd succesvol geplaatst." << endl;
+				speler.addShip(shipNames[i], shipLenghts[i], createCoords(Coordinates(coordX, coordY), shipLenghts[i], direction));
+				spelbord.draw(speler.getCoords(), cpu.getHit(), cpu.getMissed(), speler.getHit(), speler.getMissed());
+				}
+
+			} while( validPlace != true );
+		}
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }

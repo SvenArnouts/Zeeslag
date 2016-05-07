@@ -7,5 +7,3 @@ slagschip 4 1
 onderzeeboot 3 1
 torpedojager 3 2
 patrouilleschip 2 2
-
- 

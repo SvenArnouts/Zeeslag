@@ -20,23 +20,24 @@ bool Gameboard::validShip(const vector <Coordinates>& ship) {
 	}
 
 	for (unsigned int i = 0; i < ship.size(); i++){					//for-loop die door alle nieuwe coordinaten loopt
+		while (boolValue == true) {
+			//Check of de coordinaten binnen het spelbord vallen.
+			if (ship[i].getX() > boardWidth || ship[i].getY() > boardHeight
+					|| ship[i].getX() < 0 || ship[i].getY() < 0){
+				boolValue = false;
+				cout << "Het schip kan niet worden geplaatst. "
+						"Coordinaten van het schip bevinden zich buiten het spelbord. Geef opnieuw coordinaten in." << endl;
+			}
+			else {
+				for (unsigned int j = 0; j < allCoords.size(); j++){		//for-loop die door alle reeds bestaande coordinaten loopt
 
-		//Check of de coordinaten binnen het spelbord vallen.
-		if (ship[i].getX() > boardWidth || ship[i].getY() > boardHeight
-				|| ship[i].getX() < 0 || ship[i].getY() < 0){
-			boolValue = false;
-			cout << "Het schip kan niet worden geplaatst. "
-					"Coordinaten van het schip bevinden zich buiten het spelbord. Geef opnieuw coordinaten in." << endl;
-		}
-		else {
-			for (unsigned int j = 0; j < allCoords.size(); j++){		//for-loop die door alle reeds bestaande coordinaten loopt
-
-				//Check of de coordinaten niet reeds worden ingenomen door een ander schip.
-				if (ship[i].getX() == allCoords[j].getX() && ship[i].getY() == allCoords[j].getY()) {
-					boolValue = false;
-					cout << "Het schip kan niet worden geplaatst. "
-							"Coordinaten van het schip worden reeds ingenomen door een ander schip."
-							"Geef opnieuw coordinaten in." << endl;
+					//Check of de coordinaten niet reeds worden ingenomen door een ander schip.
+					if (ship[i].getX() == allCoords[j].getX() && ship[i].getY() == allCoords[j].getY()) {
+						boolValue = false;
+						cout << "Het schip kan niet worden geplaatst. "
+								"Coordinaten van het schip worden reeds ingenomen door een ander schip. "
+								"Geef opnieuw coordinaten in." << endl;
+					}
 				}
 			}
 		}

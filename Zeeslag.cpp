@@ -74,7 +74,6 @@ int main() {
 				}
 			}
 		}
-
 		//Maak het spel aan.
 		cout << "Aanmaken spelbord.." << endl;
 		Game zeeslag(width, height, shipNames, shipLenghts, numberOfShips);
