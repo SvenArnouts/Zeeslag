@@ -68,9 +68,10 @@ void Game::gameloop() {
 
 	for (unsigned int i = 0; i < shipNames.size(); i++){
 		for (int j = 1; j <= numberOfShips[i]; j++) {
-			cout << "Waar wil u uw " << shipNames[i] << " met lengte " << shipLenghts[i] << " plaatsen?" << endl;
+			cout << "Waar wil u uw " << shipNames[i] << " lengte " << shipLenghts[i] << " plaatsen?" << endl;
 			do {
 				cin >> coordX >> coordY >> direction;
+				cout << "x";
 				validPlace = speler.validShip(createCoords(Coordinates(coordX, coordY), shipLenghts[i], direction));
 				if (validPlace) {
 				cout << "Het schip werd succesvol geplaatst." << endl;

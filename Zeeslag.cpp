@@ -60,7 +60,6 @@ int main() {
 		while( getline(config, tekstregel )) {
 			if (tekstregel[0] != '#' && !tekstregel.empty() && tekstregel[0] != ' ') {
 				tekst << tekstregel << endl;
-				cout << tekstregel << endl;
 				if (regelnummer == 1 ){
 					tekst >> width >> height;
 					regelnummer++;
