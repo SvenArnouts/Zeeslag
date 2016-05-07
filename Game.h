@@ -10,6 +10,7 @@
 #include "Coordinates.h"
 #include "Graphics.h"
 #include "Gameboard.h"
+#include <stdlib.h>
 #include <iostream>
 #include <string>
 #include <vector>

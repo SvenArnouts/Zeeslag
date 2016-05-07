@@ -6,6 +6,7 @@
 
 #include "Game.h"
 
+
 //Constructor
 Game::Game(const int& width, const int& height,
 		const vector <string>& names_i, const vector <int>& lenghts_i, const vector <int>& numbers_i){
@@ -51,7 +52,7 @@ vector <Coordinates> Game::createCoords( Coordinates coord, int length, char dir
 void Game::gameloop() {
 
 	//Display de grootte van het spelbord en de deelnemende schepen
-	cout << "De grootte van het spelbord bedraagd " << speler.getWidth() << " op " << speler.getHeight() << "." << endl;
+	cout << "De grootte van het spelbord bedraagt " << speler.getWidth() << " op " << speler.getHeight() << "." << endl;
 	cout << "Volgende schepen nemen deel aan het spel:" << endl;
 	for (unsigned int i = 0; i < shipNames.size(); i++) {
 		cout << shipNames[i] << "\t \t \t met lengte " << shipLenghts[i] << ": \t \t \t aantal " << numberOfShips[i] << endl;
@@ -63,6 +64,7 @@ void Game::gameloop() {
 	int coordY = 0;
 	char direction = ' ';
 	bool validPlace = false;
+
 	//speler
 	cout << "Plaats uw shepen: " << endl;
 
@@ -74,19 +76,56 @@ void Game::gameloop() {
 				cout << "x";
 				validPlace = speler.validShip(createCoords(Coordinates(coordX, coordY), shipLenghts[i], direction));
 				if (validPlace) {
-				cout << "Het schip werd succesvol geplaatst." << endl;
-				speler.addShip(shipNames[i], shipLenghts[i], createCoords(Coordinates(coordX, coordY), shipLenghts[i], direction));
-				spelbord.draw(speler.getCoords(), cpu.getHit(), cpu.getMissed(), speler.getHit(), speler.getMissed());
+					cout << "Het schip werd succesvol geplaatst." << endl;
+					speler.addShip(shipNames[i], shipLenghts[i], createCoords(Coordinates(coordX, coordY), shipLenghts[i], direction));
+					spelbord.draw(speler.getCoords(), cpu.getHit(), cpu.getMissed(), speler.getHit(), speler.getMissed());
 				}
 
 			} while( validPlace != true );
 		}
 	}
+	cout << "Al uw schepen werden geplaatst." << endl;
+	cout << "Plaatsen schepen CPU.." << endl;
 
+	//AI
+	for (unsigned int i = 0; i < shipNames.size(); i++){
+		for (int j = 1; j <= numberOfShips[i]; j++) {
+			do {
+				coordX = rand() % 10 + 1;
+				coordY = rand() % 10 + 1;
+				if (rand() % 2 == 0) {direction = 'V';
+				}
+				else {direction = 'H';}
 
+				validPlace = cpu.validShip(createCoords(Coordinates(coordX, coordY), shipLenghts[i], direction));
+				if (validPlace) {
+					cpu.addShip(shipNames[i], shipLenghts[i], createCoords(Coordinates(coordX, coordY), shipLenghts[i], direction));
+				}
+			} while( validPlace != true );
+		}
+	}
+	cout << "CPU schepen geplaatst.";
+	cout << "De eerste die alle schepen van de tegenstander tot zinken brengt wint. Succes!" << endl;
+	cout << "U mag de eerste bom plaatsen. (Input: X Y \t voorbeeld: 10 10)";
+	do {
+		cout << "Geef coordinaten in waarop u wil vuren:" << endl;
+		do {
+			cin >> coordX >> coordY;
+			validPlace = cpu.validBomb(Coordinates(coordX, coordY));
+		} while (validPlace != true);
 
+		if (cpu.isAHit(Coordinates(coordX, coordY))){
+			cout << "Hit! Uw schot op " << coordX << " x " << coordY << " y was raak!" << endl;
+			cpu.addHit(Coordinates(coordX, coordY));
+		}
+		else {
+			cout << "Miss! Uw schot op " << coordX << " x " << coordY << " y heeft geen schip geraakt." << endl;
+			cpu.addMiss(Coordinates(coordX, coordY));
+		}
+		if (cpu.gameOver() != true) {
 
-
+		}
+	} while ( speler.gameOver() != true && cpu.gameOver() != true);
 
 
 

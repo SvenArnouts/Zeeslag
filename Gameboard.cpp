@@ -62,6 +62,7 @@ bool Gameboard::validBomb(const Coordinates& bomb) {
 	if (bomb.getX() > boardWidth || bomb.getY() > boardHeight		//Check of de ingegeven coordinaat binnen het spelbord valt
 			|| bomb.getX() < 0 || bomb.getY() < 0){
 		boolValue = false;
+		cout << " De ingegeven coordinaten vallen buiten het spelbord. Geef opnieuw coordinaten in:" << endl;
 	}
 
 	//Volgende 2 for loops checken of er niet reeds gevuurd (hit of miss) is op de coordinaat.
@@ -69,6 +70,7 @@ bool Gameboard::validBomb(const Coordinates& bomb) {
 
 		if ((bomb.getX() == hit[i].getX()) && (bomb.getY() == hit[i].getY())) {
 			boolValue = false;
+			cout << "Er werd reeds gevuurd (Hit!) op deze coordinaten. Geef opnieuw coodinaten in:" << endl;
 		}
 	}
 
@@ -76,6 +78,7 @@ bool Gameboard::validBomb(const Coordinates& bomb) {
 
 		if ((bomb.getX() == missed[i].getX()) && (bomb.getY() == missed[i].getY())) {
 			boolValue = false;
+			cout << "Er werd reeds gevuurd (Miss!) op deze coordinaten. Geef opnieuw coordinaten in:" << endl;
 		}
 	}
 	return boolValue;

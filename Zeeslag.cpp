@@ -6,6 +6,7 @@
 
 #include "Game.h"
 #include <time.h>
+#include <stdlib.h>
 #include <iostream>
 #include <string>
 #include <vector>
