@@ -20,10 +20,11 @@ class Game {
 
 public:
 	//Constructor
-	Game(int boardHeight, int boardWidth);
+	Game(const int& width, const int& height,
+			const vector <string>& names_i, const vector <int>& lenghts_i, const vector <int>& numbers_i);
 
 	//Functie die het spel voorstelt.
-	void Gameloop();
+	void gameloop();
 
 	//Functie die coordinaten voor een schip creëert uit startcoordinaten, een lengte en een richting.
 	vector <Coordinates> createCoords (Coordinates coord_i, int length, char direction);
@@ -36,6 +37,9 @@ private:
 
 	Graphics spelbord;
 
+	vector <string> shipNames;
+	vector <int> shipLenghts;
+	vector <int> numberOfShips;
 };
 
 #endif /* GAME_H_ */

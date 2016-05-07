@@ -16,9 +16,10 @@ using namespace std;
 
 int main() {
 
+	//Initialiseren van variabelen voor opnieuw starten spel
+	bool repeat = false;									//stel de boolwaarde voor herhalen in op false
+	string answer = "";										//initialiseer het antwoord
 
-	bool repeat = false;
-	string answer;
 
 	do {
 		cout << "Welkom bij het spel zeeslag." << endl;
@@ -37,7 +38,47 @@ int main() {
 			return (1);
 		}
 
+		//Inleesvariabelen
+		string name_i = "";
+		int length_i = 0;
+		int number_i = 0;
 
+		//Variabelen die meegegeven moeten worden aan het game object
+		int width = 0;
+		int height = 0;
+
+		vector <string> shipNames;
+		vector <int> shipLenghts;
+		vector <int> numberOfShips;
+
+		//Inlezen bestand
+		cout << "Inlezen configuratiebestand.." << endl;
+		string tekstregel;
+		stringstream tekst;
+		int regelnummer = 1;
+
+		while( getline(config, tekstregel )) {
+			if (tekstregel[0] != '#') {
+				tekst << tekstregel << endl;
+				if (regelnummer == 1 ){
+					tekst >> width >> height;
+					regelnummer +=1;
+				}
+				else {
+					tekst >> name_i >> length_i >> number_i;
+					shipNames.push_back(name_i);
+					shipLenghts.push_back(length_i);
+					numberOfShips.push_back(number_i);
+					regelnummer += 1;
+				}
+			}
+		}
+
+		//Maak het spel aan.
+		cout << "Aanmaken spelbord.." << endl;
+		Game zeeslag(width, height, shipNames, shipLenghts, numberOfShips);
+		cout << "Het spel wordt gestart." << endl;
+		zeeslag.gameloop();
 
 		//Vraag of het spel opnieuw moet worden opgestart.
 		cout << "Wilt u nogmaals spelen? (ja/nee)" << endl;

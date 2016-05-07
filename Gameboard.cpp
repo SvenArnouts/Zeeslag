@@ -93,7 +93,7 @@ bool Gameboard::isAHit(const Coordinates& bomb){
 }
 
 //Functie die een hit toevoegt aan het spelbord en over de schepen loopt om te kijken of het
-void addHit (const Coordinates& bomb) {
+void Gameboard::addHit (const Coordinates& bomb) {
 	hit.push_back(bomb);												//Voeg een hit toe
 
 	for (Ship x : ships) {												//Check of een schip gezonken is
