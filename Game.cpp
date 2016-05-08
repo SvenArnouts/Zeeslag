@@ -108,11 +108,11 @@ void Game::gameloop() {
 	cout << "De eerste die alle schepen van de tegenstander tot zinken brengt wint. Succes!" << endl;
 	cout << "U mag de eerste bom plaatsen. (Input: X Y \t voorbeeld: 10 10)";
 	do {
+		//Speler vuurt
 		cout << "Geef coordinaten in waarop u wil vuren:" << endl;
 		do {
 			cin >> coordX >> coordY;
-			validPlace = cpu.validBomb(Coordinates(coordX, coordY));
-		} while (validPlace != true);
+		} while (cpu.validBomb(Coordinates(coordX, coordY)) != true);
 
 		if (cpu.isAHit(Coordinates(coordX, coordY))){
 			cout << "Hit! Uw schot op " << coordX << " x " << coordY << " y was raak!" << endl;
@@ -122,13 +122,31 @@ void Game::gameloop() {
 			cout << "Miss! Uw schot op " << coordX << " x " << coordY << " y heeft geen schip geraakt." << endl;
 			cpu.addMiss(Coordinates(coordX, coordY));
 		}
+		//CPU vuurt
 		if (cpu.gameOver() != true) {
+			do {
+				coordX = rand() %10 + 1;
+				coordY = rand() %10 + 1;
+			} while (speler.validBomb(Coordinates(coordX, coordY)));
 
+			if (speler.isAHit(Coordinates(coordX, coordY))){
+				cout << "Hit! Het schot van de CPU op " << coordX << " x " << coordY << " y was raak!" << endl;
+				speler.addHit(Coordinates(coordX, coordY));
+			}
+			else {
+				cout << "Miss! Het schot van de CPU op " << coordX << " x " << coordY << " y heeft geen schip geraakt." << endl;
+				speler.addMiss(Coordinates(coordX, coordY));
+			}
 		}
 	} while ( speler.gameOver() != true && cpu.gameOver() != true);
 
 
-
+	if (speler.gameOver()) {
+		cout << "Het spel is afgelopen. De CPU heeft al uw schepen tot zinken gebracht. Volgende keer meer succes!" << endl;
+	}
+	else {
+		cout << "Het spel is afgelopen. U heeft alle schepen van de CPU tot zinken gebracht. Proficiat!" << endl;
+	}
 
 
 
